@@ -32,7 +32,7 @@ else(MYSQL_INCLUDE_DIR AND MYSQL_LIBRARY)
   )
   
   if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    file(GLOB subdirs /usr/local/*)
+    file(GLOB subdirs /usr/local/include/*)
     message(STATUS "Directories in /usr/local/: ${subdirs}")
   endif()
 
