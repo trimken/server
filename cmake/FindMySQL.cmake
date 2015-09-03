@@ -26,6 +26,7 @@ else(MYSQL_INCLUDE_DIR AND MYSQL_LIBRARY)
     /usr/include/mysql
     /usr/local/include/mysql
     /usr/local/mysql/include
+    /usr/local/mysql*/include
     /opt/local/include/mysql*/mysql
     ${PROGRAM_FILES_ARCH_PATH}/MySQL/MYSQLS~1.6/include
   )
@@ -48,6 +49,7 @@ else(MYSQL_INCLUDE_DIR AND MYSQL_LIBRARY)
         /usr/lib/mysql
         /usr/local/lib/mysql
         /usr/local/mysql/lib
+        /usr/local/mysql*/lib
         /opt/local/lib/mysql*/mysql
       )
   endif(WIN32 AND MSVC)
