@@ -30,6 +30,11 @@ else(MYSQL_INCLUDE_DIR AND MYSQL_LIBRARY)
     /opt/local/include/mysql*/mysql
     ${PROGRAM_FILES_ARCH_PATH}/MySQL/MYSQLS~1.6/include
   )
+  
+  if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    file(GLOB subdirs /usr/local/*)
+    message(STATUS "Directories in /usr/local/: ${subdirs}")
+  endif()
 
   if(WIN32 AND MSVC)
     find_library(MYSQL_LIBRARY
