@@ -13,6 +13,7 @@ branches:
   only:
     - release20
     - develop21
+    - develop21_osx # Temporary to test OSX support
 
 # build on both Linux and OSX
 os:
