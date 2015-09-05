@@ -29,8 +29,13 @@
 #include "Platform/Define.h"
 
 #if COMPILER == COMPILER_CLANG
-#  include <tr1/unordered_map>
-#  include <tr1/unordered_set>
+#  if defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_9) && MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_9
+#    include <unordered_map>
+#    include <unordered_set>
+#  else
+#    include <tr1/unordered_map>
+#    include <tr1/unordered_set>
+#  endif
 #elif COMPILER == COMPILER_INTEL
 #  include <ext/hash_map>
 #  include <ext/hash_set>
