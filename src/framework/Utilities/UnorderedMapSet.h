@@ -28,6 +28,10 @@
 #include "Platform/CompilerDefs.h"
 #include "Platform/Define.h"
 
+#if defined(__APPLE__)
+#include <AvailabilityMacros.h>
+#endif
+
 #if COMPILER == COMPILER_CLANG
 #  if defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_9) && MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_9
 #    include <unordered_map>
