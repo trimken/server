@@ -3006,6 +3006,16 @@ void Spell::update(uint32 difftime)
         return;
     }
 
+    if (m_targets.getUnitTarget() && (m_targets.getUnitTarget() != m_caster) && IsSingleTargetSpell(m_spellInfo) &&
+        !IsNextMeleeSwingSpell() && !IsAutoRepeat() && !m_IsTriggeredSpell)
+    {
+        if (!m_caster->IsWithinLOSInMap(m_targets.getUnitTarget()))
+        {
+            cancel();
+            return;
+        }
+    }
+
     // check if the player or unit caster has moved before the spell finished (exclude casting on vehicles)
     if (((m_caster->GetTypeId() == TYPEID_PLAYER || m_caster->GetTypeId() == TYPEID_UNIT) && m_timer != 0) &&
         (m_castPositionX != m_caster->GetPositionX() || m_castPositionY != m_caster->GetPositionY() || m_castPositionZ != m_caster->GetPositionZ()) &&
@@ -3046,7 +3056,11 @@ void Spell::update(uint32 difftime)
 
                     // check for incapacitating player states
                     if (m_caster->hasUnitState(UNIT_STAT_CAN_NOT_REACT))
-                        { cancel(); }
+                    {
+                        // certain channel spells are not interrupted
+                        if (!m_spellInfo->HasAttribute(SPELL_ATTR_EX_CHANNELED_1) && !m_spellInfo->HasAttribute(SPELL_ATTR_EX3_UNK28))
+                            cancel();
+                    }
 
                     // check if player has turned if flag is set
                     if (m_spellInfo->ChannelInterruptFlags & CHANNEL_FLAG_TURNING && m_castOrientation != m_caster->GetOrientation())
